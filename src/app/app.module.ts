@@ -8,11 +8,11 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 
 
+
 @NgModule({
   declarations: [
     HeaderComponent,
     AppComponent,
-    HeaderComponent,
     FooterComponent
   ],
   exports: [

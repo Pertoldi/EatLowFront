@@ -9,8 +9,7 @@ import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit
-{
+export class AuthService implements OnInit {
 
   private urlApiAuth = environment.urlApi + '/api/public/auth';
 
@@ -22,39 +21,32 @@ export class AuthService implements OnInit
 
   isAuth$ = new ReplaySubject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router, private _tokenService: TokenService)
-  {
+  constructor(private http: HttpClient, private router: Router, private _tokenService: TokenService) {
     this.isConnected();
   }
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
   }
 
   /**
    * update isAuth$
    */
-  isConnected(): void
-  {
+  isConnected(): void {
 
     const token = this._tokenService.getToken();
-    if (token == null)
-    {
+    if (token == null) {
       this.isAuth$.next(false);
       return;
     }
 
-
     this.http.post(`${this.urlApiAuth}/isTokenValid`, JSON.stringify({ token }),
       { 'headers': this.headers, withCredentials: true })
       .subscribe({
-        next: (response: any) =>
-        {
+        next: (response: any) => {
           const isConnect: boolean = response.isValid;
           this.isAuth$.next(isConnect);
         },
-        error: () =>
-        {
+        error: () => {
           this.isAuth$.next(false);
           this._tokenService.removeToken();
         }
@@ -67,22 +59,18 @@ export class AuthService implements OnInit
    * @param {string} password
    * @return {Promise<boolean>}
    */
-  login(email: string, password: string): Promise<boolean>
-  {
-    return new Promise<boolean>((resolve, reject) =>
-    {
+  login(email: string, password: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
       this.http.post(`${this.urlApiAuth}/login`, JSON.stringify({ email, password }), { 'headers': this.headers, withCredentials: true })
         .subscribe({
-          next: (response: any) =>
-          {
+          next: (response: any) => {
             const token = response.token;
             this._tokenService.setToken(token);
             this.isAuth$.next(true);
             this.router.navigate(['/']);
             resolve(true);
           },
-          error: () =>
-          {
+          error: () => {
             this.isAuth$.next(false);
             resolve(false);
           }
@@ -90,8 +78,7 @@ export class AuthService implements OnInit
     });
   }
 
-  logout()
-  {
+  logout() {
     this._tokenService.removeToken();
     this.isAuth$.next(false);
   }
@@ -99,10 +86,8 @@ export class AuthService implements OnInit
   /**
    * save the user on DB, and connect it
    */
-  register(lastname: string, firstname: string, email: string, password: string)
-  {
-    this.http.post<{ token: string }>(`${this.urlApiAuth}/register`, JSON.stringify({ lastname, firstname, email, password }), { headers: this.headers, withCredentials: true }).subscribe((response: { token: string }) =>
-    {
+  register(lastname: string, firstname: string, email: string, password: string) {
+    this.http.post<{ token: string }>(`${this.urlApiAuth}/register`, JSON.stringify({ lastname, firstname, email, password }), { headers: this.headers, withCredentials: true }).subscribe((response: { token: string }) => {
       const token = response.token;
       this._tokenService.setToken(token);
       this.router.navigate(['/']);

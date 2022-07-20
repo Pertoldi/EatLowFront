@@ -42,12 +42,12 @@ const routes: Routes = [
       ),
   },
   {
-		path: 'historique',
-		canActivate: [IsLoggedInGuard],
-		loadChildren: () =>
-			import('./pages/history/history.module')
-				.then(m => m.HistoryModule)
-	},
+    path: 'historique',
+    canActivate: [IsLoggedInGuard],
+    loadChildren: () =>
+      import('./pages/history/history.module')
+        .then(m => m.HistoryModule)
+  },
   { path: "**", redirectTo: "" },
 ];
 
@@ -55,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

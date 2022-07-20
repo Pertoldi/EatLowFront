@@ -11,15 +11,13 @@ import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ConsumptionService
-{
+export class ConsumptionService {
   private _idUser: number;
   private _baseUrl: string;
   public consumptions$: ReplaySubject<IConsumable[]> = new ReplaySubject();
   private _headers: HttpHeaders;
-  constructor(private _tokenService: TokenService, private _http: HttpClient, private _consumableFactory: ConsumptionFactory)
-  {
-    this._idUser = 15; // Viendra d'un service User ou autre j'sais pas mec qu'est-ce tu veux putain
+  constructor(private _tokenService: TokenService, private _http: HttpClient, private _consumableFactory: ConsumptionFactory) {
+    this._idUser = 15;
     this._baseUrl = `${environment.urlApi}/api/users/${this._idUser}`
     this._headers = new HttpHeaders()
       .set('Accept', 'application/json')
@@ -28,21 +26,18 @@ export class ConsumptionService
     this.getAllIngredients();
   }
 
-  public getAllIngredients()
-  {
+  public getAllIngredients() {
     this._http
       .get<IUser>(this._baseUrl, {
         headers: this._headers,
         withCredentials: true
       })
       .subscribe({
-        next: (user: IUser) =>
-        {
+        next: (user: IUser) => {
           const consumables: IConsumable[] = this._consumableFactory.getConsumable(user.historyMeals, user.historyIngredients);
           this.consumptions$.next(consumables);
         },
-        error: () =>
-        {
+        error: () => {
         }
       });
   }

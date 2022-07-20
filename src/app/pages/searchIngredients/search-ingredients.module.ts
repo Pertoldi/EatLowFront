@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchIngredientsComponent } from './search-ingredients.component';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SearchRoutingModule } from './search-ingredients-routing.module';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+
+import { SearchRoutingModule } from './search-ingredients-routing.module';
+import { SearchIngredientsComponent } from './search-ingredients.component';
 
 
 
@@ -17,8 +18,6 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
     SearchRoutingModule,
     SharedComponentsModule,
 
-
-
-  ]})
-
+  ]
+})
 export class SearchIngredientsModule { }
