@@ -17,7 +17,6 @@ import { SearchIngredientsComponent } from './search-ingredients.component';
     RouterModule,
     SearchRoutingModule,
     SharedComponentsModule,
-
   ]
 })
 export class SearchIngredientsModule { }

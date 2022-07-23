@@ -32,4 +32,4 @@ import { ReactiveFormsModule } from "@angular/forms";
     ModalComponent
   ]
 })
-export class SharedComponentsModule {}
+export class SharedComponentsModule { }

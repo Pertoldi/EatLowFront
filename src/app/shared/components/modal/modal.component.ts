@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
 
   @Input()
   title: string = '';
@@ -17,8 +17,5 @@ export class ModalComponent implements OnInit {
   modalId: string = '';
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
