@@ -31,6 +31,7 @@ export class Meal implements IMeal, IConsumable {
         ecoScore = ecoScore + this.otherStepCost;
         return ecoScore;
     }
+
     get energyCost(): EnergyCost {
         return new EnergyCost(this.id, this.totalStep('agriculture'), this.totalStep('transformation'), this.totalStep('packaging'), this.totalStep('transport'), this.totalStep('supermarket'), this.totalStep('consomation'));
     }

@@ -11,30 +11,24 @@ import { MealFactory } from '../../shared/services/factories/mealFactory/meal-fa
   templateUrl: './plat.component.html',
   styleUrls: ['./plat.component.scss']
 })
-export class PlatComponent implements OnInit
-{
+export class PlatComponent implements OnInit {
 
   public id: string = '';
   public isDetails = false;
   public meal!: Meal;
   public energyCost?: EnergyCost;
 
-
   constructor(
     private _route: ActivatedRoute,
     private _mealService: MealService,
-    private _mealFactory: MealFactory)
-  {
-
+    private _mealFactory: MealFactory) {
   }
-  ngOnInit(): void
-  {
-    this._route.params.subscribe(params =>
-    {
+
+  ngOnInit(): void {
+    this._route.params.subscribe(params => {
 
       this.id = params['id'];
-      this._mealService.getOneMeal(this.id).subscribe((meal: IMeal) =>
-      {
+      this._mealService.getOneMeal(this.id).subscribe((meal: IMeal) => {
         this.meal = this._mealFactory.getMeal(meal);
         this.energyCost = this.meal.energyCost;
       })
